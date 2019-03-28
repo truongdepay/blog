@@ -8,6 +8,8 @@ class Index extends MX_Controller
         $this->load->helper([
             'url'
         ]);
+
+        $this->load->model('post_model');
     }
 
     public function index()
@@ -22,6 +24,27 @@ class Index extends MX_Controller
     {
         $data = [];
         $template = 'menu';
+        $this->load->view($template, $data);
+    }
+
+    public function loadBanner()
+    {
+        $data = [];
+
+        $where = [
+            'status' => 1
+        ];
+        $result = $this->post_model->getResult($where);
+        $data['result'] = $result;
+
+        $template = 'banner';
+        $this->load->view($template, $data);
+    }
+
+    public function loadBlog()
+    {
+        $data = [];
+        $template = 'blog';
         $this->load->view($template, $data);
     }
 
